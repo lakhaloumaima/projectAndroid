@@ -44,7 +44,7 @@
                 android:hint="Email"
                 android:drawableLeft="@drawable/baseline_email_24"
                 android:drawablePadding="8dp"
-                android:textColor="@color/black"/>
+                android:textColor="@color/white"  />
 
 
             <EditText
@@ -57,7 +57,7 @@
                 android:inputType="textPassword"
                 android:drawableLeft="@drawable/baseline_lock_24"
                 android:drawablePadding="8dp"
-                android:textColor="@color/black"/>
+                android:textColor="@color/white"  />
 
             <Button
                 android:id="@+id/btnRegister"
@@ -67,7 +67,8 @@
                 android:backgroundTint="@color/lavender"
                 android:text="Sign Up"
                 android:textSize="18sp"
-                app:cornerRadius="20dp" />
+                app:cornerRadius="20dp"
+                android:textColor="@color/white" />
 
             <TextView
                 android:layout_width="wrap_content"
