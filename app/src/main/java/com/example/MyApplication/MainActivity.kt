@@ -21,8 +21,8 @@ class MainActivity : AppCompatActivity() {
         mAuth=FirebaseAuth.getInstance()
         email=findViewById(R.id.email)
         password=findViewById(R.id.password)
-        btn=findViewById(R.id.create)
-        btnLogin=findViewById(R.id.login)
+        btn=findViewById(R.id.btnRegister )
+        btnLogin=findViewById(R.id.loginRedirectText )
         btn.setOnClickListener {
             createUser()
         }

@@ -30,8 +30,8 @@ class RegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
-        btnRegister = findViewById(R.id.btn_Register)
-        loginNow = findViewById(R.id.loginNow)
+        btnRegister = findViewById(R.id.btnRegister)
+        loginNow = findViewById(R.id.loginRedirectText)
         email = findViewById(R.id.email)
         password = findViewById(R.id.password)
 
@@ -81,7 +81,6 @@ class RegisterActivity : AppCompatActivity() {
 // If sign-in fails, display a message to the user.
                         Toast.makeText(
                             baseContext,
-
                             "Authentication failed.....",
                             Toast.LENGTH_SHORT,
 
