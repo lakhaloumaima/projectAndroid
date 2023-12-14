@@ -3,6 +3,7 @@ package com.example.MyApplication
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -31,14 +32,18 @@ class LoginActivity : AppCompatActivity() {
 
         btn.setOnClickListener { login() }
     }
+    // Inside LoginActivity.kt
     override fun onStart() {
         super.onStart()
         val currentUser: FirebaseUser? = mAuth.currentUser
-        if(currentUser!==null){
-            Toast.makeText(this,"user already connected", Toast.LENGTH_LONG).show()
-          //  val intent = Intent(this, ProfilActivity::class.java)
-       //     startActivity(intent)
-           // finish()
+        if (currentUser != null) {
+            Toast.makeText(this, "User already connected", Toast.LENGTH_LONG).show()
+            val intent = Intent(this, ProfilActivity::class.java)
+            startActivity(intent)
+            finish()
+            Log.d("LoginActivity", "Login button clicked !! ")
+
+            //  finish()
         }
     }
     fun login () {
@@ -49,6 +54,12 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this,"Autth success",Toast.LENGTH_LONG).show()
                 intent = Intent(this,ProfilActivity::class.java)
                 startActivity(intent)
+                finish()
+                Log.d("LoginActivity", "Login button clicked")
+                // Check if the user is not null before navigating
+
+
+                //     finish()  // Optionally, finish the LoginActivity to prevent going back
             }else{
                 Toast.makeText(this,"Autth failed",Toast.LENGTH_LONG).show()
             }

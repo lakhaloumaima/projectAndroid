@@ -1,5 +1,6 @@
 package com.example.MyApplication
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -9,33 +10,42 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.UserProfileChangeRequest
 
-
 class ProfilActivity : AppCompatActivity() {
-    lateinit var mAuth: FirebaseAuth;
-    lateinit var email: TextView;
-    lateinit var id: TextView
-    lateinit var btn: Button;
-    lateinit var name:EditText
+
+    private lateinit var mAuth: FirebaseAuth
+    private lateinit var email: TextView
+    private lateinit var id: TextView
+    private lateinit var btn: Button
+    private lateinit var name: EditText
+    private lateinit var liste: Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_profil )
-        mAuth=FirebaseAuth.getInstance();
-        name=findViewById(R.id.name)
-        id=findViewById(R.id.id)
-        email=findViewById(R.id.email)
-        btn=findViewById(R.id.update)
+        setContentView(R.layout.activity_profil)
+        mAuth = FirebaseAuth.getInstance()
+        name = findViewById(R.id.name)
+        liste = findViewById(R.id.liste)
+        id = findViewById(R.id.id)
+        email = findViewById(R.id.email)
+        btn = findViewById(R.id.update)
         btn.setOnClickListener { updateProfile() }
 
+        liste.setOnClickListener {
+             intent = Intent(this,ListeActivity::class.java)
+             startActivity(intent)
+        }
+
+
     }
+
     override fun onStart() {
         super.onStart()
         val currentUser: FirebaseUser? = mAuth.currentUser
-        if(currentUser!== null){
+        if (currentUser != null) {
             val user: FirebaseUser? = mAuth.currentUser
             id.text = user?.uid
             email.text = user?.email
             name.setText(user?.displayName)
-
         }
     }
 
@@ -51,7 +61,10 @@ class ProfilActivity : AppCompatActivity() {
             ?.addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     // Profile updated successfully
-                    name.setText(newName)  // Update the EditText with the new name
+                    val updatedUser = mAuth.currentUser
+                    name.setText(updatedUser?.displayName) // Update the EditText with the new name
+                    val intent = Intent(this, AppActivity::class.java)
+                    startActivity(intent)
                     // You can show a toast or perform other actions if needed
                 } else {
                     // Handle the failure to update the profile
@@ -59,5 +72,4 @@ class ProfilActivity : AppCompatActivity() {
                 }
             }
     }
-
 }

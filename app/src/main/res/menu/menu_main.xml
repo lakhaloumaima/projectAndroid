@@ -1,0 +1,41 @@
+<!-- res/menu/menu_main.xml -->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/action_appels"
+        android:title="Appels">
+
+        <menu>
+            <item
+                android:id="@+id/action_appel_normal"
+                android:title="Appel Normal" />
+            <item
+                android:id="@+id/action_appel_urgence"
+                android:title="Appel d’Urgence" />
+        </menu>
+    </item>
+
+    <item
+        android:id="@+id/action_sms"
+        android:title="SMS">
+
+        <menu>
+            <item
+                android:id="@+id/action_sms_normal"
+                android:title="SMS Normal" />
+            <item
+                android:id="@+id/action_sms_urgence"
+                android:title="SMS d’Urgence" />
+        </menu>
+    </item>
+
+    <item
+        android:id="@+id/action_camera"
+        android:title="Caméra" />
+
+    <item
+        android:id="@+id/action_quitter"
+        android:title="Quitter" />
+
+
+</menu>
