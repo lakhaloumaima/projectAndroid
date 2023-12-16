@@ -86,12 +86,44 @@ tools:context=".ProfilActivity">
             android:textColor="@color/white"/>
 
         <Button
+            android:id="@+id/tp2"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="30dp"
+            android:backgroundTint="@color/lavender"
+            android:text="Voir tp2 "
+            android:textSize="18sp"
+            app:cornerRadius="20dp"
+            android:textColor="@color/white"/>
+
+        <Button
             android:id="@+id/liste"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginTop="30dp"
             android:backgroundTint="@color/lavender"
-            android:text="View Liste "
+            android:text="Tp 4 Partie 1 "
+            android:textSize="18sp"
+            app:cornerRadius="20dp"
+            android:textColor="@color/white"/>
+
+        <Button
+            android:id="@+id/world"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="30dp"
+            android:backgroundTint="@color/lavender"
+            android:text="Tp 4 Partie 2 "
+            android:textSize="18sp"
+            app:cornerRadius="20dp"
+            android:textColor="@color/white"/>
+        <Button
+            android:id="@+id/tp5"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="30dp"
+            android:backgroundTint="@color/lavender"
+            android:text="Voir tp5 "
             android:textSize="18sp"
             app:cornerRadius="20dp"
             android:textColor="@color/white"/>

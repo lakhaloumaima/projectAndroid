@@ -15,4 +15,27 @@
         volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus
         dui nec risus. Maecenas non sodales nisi .
     </string>
+
+    <string name="concat">Concat</string>
+    <string name="calculatrice">Calculatrice</string>
+    <string name="moyenne">Moyenne</string>
+    <string name="choose_activity_prompt">Please choose an activity</string>
+    <string name="ch1">Enter the first string</string>
+    <string name="ch2">Enter the second string</string>
+    <string name="longeur">Show length</string>
+    <string name="concatbtn">Concatenate</string>
+    <string name="Donner">Donner un Montant</string>
+    <string name="btn1">DINAR TUNISIEN --> EURO</string>
+    <string name="btn2">EURO --> DINAR TUNISIEN</string>
+    <string name="result">Résultat De Conversion</string>
+    <string name="result_message">Le montant de %.2f %s équivaut à %.2f</string>
+    <string name="envoyer">Envoyer résultat</string>
+    <string name="terminer">Terminer</string>
+    <string name="celsius_to_fahrenheit">Celsius to Fahrenheit</string>
+    <string name="fahrenheit_to_celsius">Fahrenheit to Celsius</string>
+    <string name="convert">Convert</string>
+    <string name="result1">Result</string>
+    <string name="round_result">Round Result</string>
+    <string name="warning_empty_input">Please enter a temperature value.</string>
+    <string name="Enter">Enter temperature</string>
 </resources>

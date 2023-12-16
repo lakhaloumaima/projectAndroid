@@ -20,6 +20,33 @@
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
         <activity
+            android:name=".ConversionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TemperatureActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CurrencyActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Tp2Activity"
+            android:exported="false" />
+        <activity
+            android:name=".MoyenneActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CalculActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ConcatActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Tp5Activity"
+            android:exported="false" />
+        <activity
+            android:name=".WorldActivity"
+            android:exported="false" />
+        <activity
             android:name=".ListeActivity"
             android:exported="false" />
         <activity

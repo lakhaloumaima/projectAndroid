@@ -3,6 +3,7 @@ package com.example.MyApplication
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -18,6 +19,9 @@ class ProfilActivity : AppCompatActivity() {
     private lateinit var btn: Button
     private lateinit var name: EditText
     private lateinit var liste: Button
+    private lateinit var world: Button
+    private lateinit var tp5: Button
+    private lateinit var tp2: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,9 +29,13 @@ class ProfilActivity : AppCompatActivity() {
         mAuth = FirebaseAuth.getInstance()
         name = findViewById(R.id.name)
         liste = findViewById(R.id.liste)
+        world = findViewById(R.id.world)
         id = findViewById(R.id.id)
         email = findViewById(R.id.email)
         btn = findViewById(R.id.update)
+        tp5 = findViewById(R.id.tp5)
+        tp2 = findViewById(R.id.tp2)
+
         btn.setOnClickListener { updateProfile() }
 
         liste.setOnClickListener {
@@ -35,7 +43,26 @@ class ProfilActivity : AppCompatActivity() {
              startActivity(intent)
         }
 
+        world.setOnClickListener {
+            intent = Intent(this,WorldActivity::class.java)
+            startActivity(intent)
+        }
 
+        tp5.setOnClickListener {
+            intent = Intent(this,Tp5Activity::class.java)
+            startActivity(intent)
+        }
+        tp2.setOnClickListener {
+            intent = Intent(this,Tp2Activity::class.java)
+            startActivity(intent)
+        }
+
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        menuInflater.inflate(R.menu.menu_main, menu )
+        return true
     }
 
     override fun onStart() {
