@@ -7,6 +7,7 @@ import android.view.Menu
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.UserProfileChangeRequest
@@ -22,6 +23,7 @@ class ProfilActivity : AppCompatActivity() {
     private lateinit var world: Button
     private lateinit var tp5: Button
     private lateinit var tp2: Button
+    private lateinit var tp3: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +37,7 @@ class ProfilActivity : AppCompatActivity() {
         btn = findViewById(R.id.update)
         tp5 = findViewById(R.id.tp5)
         tp2 = findViewById(R.id.tp2)
+        tp3 = findViewById(R.id.tp3)
 
         btn.setOnClickListener { updateProfile() }
 
@@ -57,13 +60,14 @@ class ProfilActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        tp3.setOnClickListener {
+            intent = Intent(this,AppActivity::class.java)
+            startActivity(intent)
+        }
+
+
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_main, menu )
-        return true
-    }
 
     override fun onStart() {
         super.onStart()
@@ -90,12 +94,14 @@ class ProfilActivity : AppCompatActivity() {
                     // Profile updated successfully
                     val updatedUser = mAuth.currentUser
                     name.setText(updatedUser?.displayName) // Update the EditText with the new name
-                    val intent = Intent(this, AppActivity::class.java)
-                    startActivity(intent)
+                    Toast.makeText(this, " Name updated successfully ! ", Toast.LENGTH_SHORT).show()
+                 //   val intent = Intent(this, AppActivity::class.java)
+                 //   startActivity(intent)
                     // You can show a toast or perform other actions if needed
                 } else {
                     // Handle the failure to update the profile
                     // You can show an error message or perform other actions
+                    Toast.makeText(this, " Name not updated ! ", Toast.LENGTH_SHORT).show()
                 }
             }
     }

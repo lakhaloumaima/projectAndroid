@@ -17,6 +17,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.MyApplication.databinding.ActivityAppBinding
+import com.google.android.material.appbar.MaterialToolbar
 
 class AppActivity : AppCompatActivity() {
 
@@ -24,84 +25,79 @@ class AppActivity : AppCompatActivity() {
     lateinit var binding: ActivityAppBinding
 
     lateinit var imageView: ImageView // Move the declaration here
+    companion object {
+        private const val CAMERA_REQUEST_CODE = 100
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityAppBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Initialize imageView after setContentView
-        imageView = findViewById(R.id.imageView)
+        val toolbar: MaterialToolbar  = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
 
-        setSupportActionBar(binding.toolbar)
-
-        val navController = findNavController(R.id.nav_host_fragment_content_app)
-        appBarConfiguration = AppBarConfiguration(navController.graph)
-        setupActionBarWithNavController(navController, appBarConfiguration)
-
-        binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
+        imageView = findViewById(R.id.imageView) // Replace with your actual ImageView ID
 
     }
-
-    override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_content_app)
-        return navController.navigateUp(appBarConfiguration)
-                || super.onSupportNavigateUp()
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu ): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_main, menu )
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
         return true
+    }
+    private fun showToast(messageResId: Int) {
+        Toast.makeText(this, getString(messageResId), Toast.LENGTH_SHORT).show()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_sms_normal -> {
-                // Code à exécuter pour l'option "SMS Normal"
-                showToast("SMS Normal selected")
-                return true
-            }
-            R.id.action_sms_urgence -> {
-                // Code à exécuter pour l'option "SMS d'Urgence"
-                showToast("SMS d'Urgence selected")
-                val smsManager = SmsManager.getDefault()
-                val phoneNumber = resources.getString(R.string.phone)
-                val message = resources.getString(R.string.message)
-                smsManager.sendTextMessage(phoneNumber, null, message, null, null)
-
-                return true
-            }
             R.id.action_appel_normal -> {
-                // Code à exécuter pour l'option "Appel Normal"
-                showToast("Appel Normal selected")
-
-                return true
-            }
-            R.id.action_appel_urgence -> {
-                // Code à exécuter pour l'option "Appel d'Urgence"
-                showToast("Appel d'Urgence selected")
+                showToast("SMS Normal selected")
+                // Handle "Appel Normal" click
+                // Launch CallActivity or perform the desired action
                 val callIntent = Intent(Intent.ACTION_CALL)
                 callIntent.data = Uri.parse("tel:" + resources.getString(R.string.phone))
                 startActivity(callIntent)
                 return true
             }
+            R.id.action_appel_urgence -> {
+                showToast("SMS d'Urgence selected")
+                // Handle "Appel d’Urgence" click
+                // Perform emergency call logic
+                return true
+            }
+            R.id.action_sms_normal -> {
+                showToast("Appel Normal selected")
+                // Handle "SMS Normal" click
+                // Launch WriteSMS activity or perform the desired action
+                val phoneNumber = "24540686"
+                val message = "Hello, this is a test message."
+                // Create an intent with the SMS URI scheme
+                val smsIntent = Intent(Intent.ACTION_SENDTO)
+                smsIntent.data = Uri.parse("smsto:$phoneNumber")
+                // Add the message to the intent
+                smsIntent.putExtra("sms_body", message)
+                // Start the activity
+                startActivity(smsIntent)
+                return true
+            }
+            R.id.action_sms_urgence -> {
+                showToast("Appel d'Urgence selected")
+                // Handle "SMS d’Urgence" click
+                // Perform emergency SMS logic
+                return true
+            }
             R.id.action_camera -> {
-                // Code à exécuter pour l'option "Caméra"
                 showToast("Caméra selected")
+                // Handle "Caméra" click
+                // Launch CameraActivity or perform the desired action
                 val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
                 val CAMERA_REQUEST_CODE = 100
                 startActivityForResult(cameraIntent, CAMERA_REQUEST_CODE)
-
                 return true
             }
             R.id.action_quitter -> {
-                // Code à exécuter pour l'option "Quitter"
                 showToast("Quitter selected")
+                // Handle "Quitter" click
                 finish() // Fermer l'application
                 return true
             }
@@ -114,15 +110,23 @@ class AppActivity : AppCompatActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        val CAMERA_REQUEST_CODE = 100
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == CAMERA_REQUEST_CODE && resultCode == RESULT_OK) {
-            // Handle the captured image, if needed
+            // Handle the captured image
             val imageBitmap = data?.extras?.get("data") as Bitmap?
             if (imageBitmap != null) {
-                // Do something with the imageBitmap
+                // Display the captured image in the ImageView
+                imageView.setImageBitmap(imageBitmap)
+
+                // Save the image to the device's gallery (optional)
+                MediaStore.Images.Media.insertImage(
+                    contentResolver,
+                    imageBitmap,
+                    "Captured Image",
+                    "Image captured using the camera"
+                )
+
                 showToast("Image captured successfully")
-              //  imageView.setImageBitmap(imageBitmap)
             }
         }
     }
