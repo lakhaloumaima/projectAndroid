@@ -38,4 +38,5 @@
     <string name="round_result">Round Result</string>
     <string name="warning_empty_input">Please enter a temperature value.</string>
     <string name="Enter">Enter temperature</string>
+    <string name="title_activity_maps">MapsActivity</string>
 </resources>
