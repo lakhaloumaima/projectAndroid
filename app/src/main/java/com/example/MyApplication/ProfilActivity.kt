@@ -38,6 +38,7 @@ class ProfilActivity : AppCompatActivity() {
         tp5 = findViewById(R.id.tp5)
         tp2 = findViewById(R.id.tp2)
         tp3 = findViewById(R.id.tp3)
+        val logout: Button = findViewById(R.id.logout)
 
         btn.setOnClickListener { updateProfile() }
 
@@ -65,10 +66,22 @@ class ProfilActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        logout.setOnClickListener {
+            // Call the method to handle logout
+            handleLogout()
+        }
+
 
     }
 
-
+    // Method to handle logout
+    private fun handleLogout() {
+        mAuth.signOut()
+        // Start the LoginActivity and finish the current activity
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+        finish() // Close the current activity
+    }
     override fun onStart() {
         super.onStart()
         val currentUser: FirebaseUser? = mAuth.currentUser

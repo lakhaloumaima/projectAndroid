@@ -13,74 +13,75 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
 class MainActivity : AppCompatActivity() {
-    lateinit var mAuth: FirebaseAuth
-    lateinit var email:EditText
-    lateinit var password:EditText
-    lateinit var btn:Button
-    lateinit var btnLogin:Button
-    lateinit var maps:Button
+
+    lateinit var tp1:Button
+    lateinit var tp2:Button
+    lateinit var tp3:Button
+    lateinit var tp4p1:Button
+    lateinit var tp4p2:Button
+    lateinit var tp5:Button
+    lateinit var tp6:Button
+    lateinit var tp7:Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        mAuth=FirebaseAuth.getInstance()
-        email=findViewById(R.id.email)
-        password=findViewById(R.id.password)
-        btn=findViewById(R.id.btnRegister )
-        btnLogin=findViewById(R.id.loginRedirectText )
-        val imageView: TextView = findViewById(R.id.maps)
+
+        tp1 =findViewById(R.id.tp1 )
+        tp2 =findViewById(R.id.tp2 )
+        tp3 =findViewById(R.id.tp3 )
+        tp4p1 =findViewById(R.id.tp4p1 )
+        tp4p2 =findViewById(R.id.tp4p2 )
+        tp5 =findViewById(R.id.tp5 )
+        tp6 =findViewById(R.id.tp6 )
+        tp7 =findViewById(R.id.tp7 )
 
         val download: Button = findViewById(R.id.download)
         download.setOnClickListener {
-         //   intent = Intent(this,DownloadActivity::class.java)
-           // startActivity(intent)
+            //   intent = Intent(this,DownloadActivity::class.java)
+            // startActivity(intent)
         }
 
-        btn.setOnClickListener {
-            createUser()
-        }
-        btnLogin.setOnClickListener {
-            intent = Intent(this,LoginActivity::class.java)
+        tp1.setOnClickListener {
+            intent = Intent(this,RegisterActivity::class.java)
             startActivity(intent)
         }
 
-        imageView.setOnClickListener {
-            // Open map with the current location
-            val mapIntentUri: Uri = Uri.parse("geo:0,0?q=my+location")
-            val mapIntent = Intent(Intent.ACTION_VIEW, mapIntentUri)
-            mapIntent.setPackage("com.google.android.apps.maps")
-
-            // Check if there's an activity to handle the map intent
-            if (mapIntent.resolveActivity(packageManager) != null) {
-                startActivity(mapIntent)
-            } else {
-                // Handle the case where there is no app to handle the map intent
-                Toast.makeText(this, "No app to handle map intent", Toast.LENGTH_SHORT).show()
-            }
+        tp2.setOnClickListener {
+            intent = Intent(this,Tp2Activity::class.java)
+            startActivity(intent)
         }
+        tp3.setOnClickListener {
+            intent = Intent(this,AppActivity::class.java)
+            startActivity(intent)
+        }
+
+        tp4p1.setOnClickListener {
+            intent = Intent(this,ListeActivity::class.java)
+            startActivity(intent)
+
+        }
+        tp4p2.setOnClickListener {
+            intent = Intent(this,WorldActivity::class.java)
+            startActivity(intent)
+
+        }
+
+        tp5.setOnClickListener {
+            intent = Intent(this,Tp5Activity::class.java)
+            startActivity(intent)
+        }
+        tp6.setOnClickListener {
+            intent = Intent(this,RegisterActivity::class.java)
+            startActivity(intent)
+        }
+        tp7.setOnClickListener {
+            intent = Intent(this,MapsActivity::class.java)
+            startActivity(intent)
+        }
+
 
     }
 
-    override fun onStart() {
-        super.onStart()
-        val currentUser: FirebaseUser? = mAuth.currentUser
-        if(currentUser!==null){
-            Toast.makeText(this,"user already connected",Toast.LENGTH_LONG).show()
 
-         //   finish()
-        }
-    }
-    fun createUser () {
-        mAuth.createUserWithEmailAndPassword(email.text.toString(),password.text.toString())
-            .addOnCompleteListener { task->
-            if (task.isSuccessful){
-               // val currentUser :FirebaseUser? = mAuth.currentUser
-                Toast.makeText(this,"user created",Toast.LENGTH_LONG).show()
-               // intent = Intent(this,LoginActivity::class.java)
-              //  startActivity(intent)
-            }else{
-                Toast.makeText(this,"user not created !!",Toast.LENGTH_LONG).show()
-            }
-
-        }
-    }
 }

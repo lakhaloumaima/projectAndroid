@@ -3,7 +3,9 @@ package com.example.MyApplication
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
@@ -14,9 +16,9 @@ class MapsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_maps)
 
-        val imageView: ImageView = findViewById(R.id.mapImageView)
+        val maps: TextView = findViewById(R.id.maps)
 
-        imageView.setOnClickListener {
+        maps.setOnClickListener {
             // Open map with the current location
             val mapIntentUri: Uri = Uri.parse("geo:0,0?q=my+location")
             val mapIntent = Intent(Intent.ACTION_VIEW, mapIntentUri)

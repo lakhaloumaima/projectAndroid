@@ -1,7 +1,7 @@
 package com.example.MyApplication
 
-
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -9,84 +9,72 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 
 class RegisterActivity : AppCompatActivity() {
-    lateinit var auth: FirebaseAuth
-    lateinit var btnRegister: Button
-    lateinit var loginNow: TextView
-    lateinit var email: EditText;
-    lateinit var password: EditText;
+    lateinit var mAuth: FirebaseAuth
+    lateinit var email: EditText
+    lateinit var password: EditText
+    lateinit var btn: Button
+    lateinit var btnLogin: Button
 
-    public override fun onStart() {
-        super.onStart()
-// Check if user is signed in (non-null) and update UI accordingly.
-        val currentUser = auth.currentUser
-        if (currentUser != null) {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
-        btnRegister = findViewById(R.id.btnRegister)
-        loginNow = findViewById(R.id.loginRedirectText)
-        email = findViewById(R.id.email)
-        password = findViewById(R.id.password)
+        mAuth= FirebaseAuth.getInstance()
+        email=findViewById(R.id.email)
+        password=findViewById(R.id.password)
+        btn=findViewById(R.id.btnRegister )
+        btnLogin=findViewById(R.id.loginRedirectText )
+        val maps: TextView = findViewById(R.id.maps)
 
-        auth = FirebaseAuth.getInstance()
-        loginNow.setOnClickListener {
-            val intent = Intent(this, LoginActivity::class.java)
+
+        btn.setOnClickListener {
+            createUser()
+        }
+        btnLogin.setOnClickListener {
+            intent = Intent(this,LoginActivity::class.java)
             startActivity(intent)
         }
-        btnRegister.setOnClickListener {
-            val email = email.text.toString()
-            val password = password.text.toString()
-           // binding.progress.visibility = View.VISIBLE
-            if (email.isEmpty()) {
-                Toast.makeText(this, "Email is empty", Toast.LENGTH_SHORT).show()
-              //  binding.progress.visibility = View.GONE
-                return@setOnClickListener
+
+        maps.setOnClickListener {
+            // Open map with the current location
+            val mapIntentUri: Uri = Uri.parse("geo:0,0?q=my+location")
+            val mapIntent = Intent(Intent.ACTION_VIEW, mapIntentUri)
+            mapIntent.setPackage("com.google.android.apps.maps")
+
+            // Check if there's an activity to handle the map intent
+            if (mapIntent.resolveActivity(packageManager) != null) {
+                startActivity(mapIntent)
+            } else {
+                // Handle the case where there is no app to handle the map intent
+                Toast.makeText(this, "No app to handle map intent", Toast.LENGTH_SHORT).show()
             }
-            if (password.isEmpty()) {
-                Toast.makeText(this, "password is empty", Toast.LENGTH_SHORT).show()
-             //   binding.progress.visibility = View.GONE
-                return@setOnClickListener
-            }
-            /*      val passwordRegex = Regex("^(?=.*[A-Z])(?=.*\\d).{6,}\$")
-                  if (!password.matches(passwordRegex)) {
-                      Toast.makeText(this, "Password must be at least 6 characters long, contain at least one uppercase letter, and one digit.", Toast.LENGTH_SHORT).show()
-                      binding.progress.visibility = View.GONE
-                      return@setOnClickListener
-                  }*/
-            auth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this) { task ->
-               //     binding.progress.visibility = View.GONE
-                    if (task.isSuccessful) {
-// Sign in success, update UI with the signed-in user's
-                        Toast.makeText(
-                            baseContext,
-                            "Account created.",
-                            Toast.LENGTH_SHORT,
-
-                            ).show()
-
-                        val intent = Intent(this, MainActivity::class.java)
-
-                        startActivity(intent)
-
-                        finish()
-                    } else {
-// If sign-in fails, display a message to the user.
-                        Toast.makeText(
-                            baseContext,
-                            "Authentication failed.....",
-                            Toast.LENGTH_SHORT,
-
-                            ).show()
-                    }
-                }
         }
+
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val currentUser: FirebaseUser? = mAuth.currentUser
+        if(currentUser!==null){
+            Toast.makeText(this,"user already connected", Toast.LENGTH_LONG).show()
+
+            //   finish()
+        }
+    }
+    fun createUser () {
+        mAuth.createUserWithEmailAndPassword(email.text.toString(),password.text.toString())
+            .addOnCompleteListener { task->
+                if (task.isSuccessful){
+                    // val currentUser :FirebaseUser? = mAuth.currentUser
+                    Toast.makeText(this,"user created", Toast.LENGTH_LONG).show()
+                    // intent = Intent(this,LoginActivity::class.java)
+                    //  startActivity(intent)
+                }else{
+                    Toast.makeText(this,"user not created !!", Toast.LENGTH_LONG).show()
+                }
+
+            }
     }
 }
