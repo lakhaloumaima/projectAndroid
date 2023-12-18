@@ -38,8 +38,8 @@ class MainActivity : AppCompatActivity() {
 
         val download: Button = findViewById(R.id.download)
         download.setOnClickListener {
-            //   intent = Intent(this,DownloadActivity::class.java)
-            // startActivity(intent)
+            intent = Intent(this,DownloadActivity::class.java)
+            startActivity(intent)
         }
 
         tp1.setOnClickListener {
