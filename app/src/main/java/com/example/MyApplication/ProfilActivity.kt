@@ -19,52 +19,19 @@ class ProfilActivity : AppCompatActivity() {
     private lateinit var id: TextView
     private lateinit var btn: Button
     private lateinit var name: EditText
-    private lateinit var liste: Button
-    private lateinit var world: Button
-    private lateinit var tp5: Button
-    private lateinit var tp2: Button
-    private lateinit var tp3: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profil)
         mAuth = FirebaseAuth.getInstance()
         name = findViewById(R.id.name)
-        liste = findViewById(R.id.liste)
-        world = findViewById(R.id.world)
         id = findViewById(R.id.id)
         email = findViewById(R.id.email)
         btn = findViewById(R.id.update)
-        tp5 = findViewById(R.id.tp5)
-        tp2 = findViewById(R.id.tp2)
-        tp3 = findViewById(R.id.tp3)
+
         val logout: Button = findViewById(R.id.logout)
 
         btn.setOnClickListener { updateProfile() }
-
-        liste.setOnClickListener {
-             intent = Intent(this,ListeActivity::class.java)
-             startActivity(intent)
-        }
-
-        world.setOnClickListener {
-            intent = Intent(this,WorldActivity::class.java)
-            startActivity(intent)
-        }
-
-        tp5.setOnClickListener {
-            intent = Intent(this,Tp5Activity::class.java)
-            startActivity(intent)
-        }
-        tp2.setOnClickListener {
-            intent = Intent(this,Tp2Activity::class.java)
-            startActivity(intent)
-        }
-
-        tp3.setOnClickListener {
-            intent = Intent(this,AppActivity::class.java)
-            startActivity(intent)
-        }
 
         logout.setOnClickListener {
             // Call the method to handle logout
@@ -78,9 +45,11 @@ class ProfilActivity : AppCompatActivity() {
     private fun handleLogout() {
         mAuth.signOut()
         // Start the LoginActivity and finish the current activity
+        Toast.makeText(this, "You are Logged Out ! ", Toast.LENGTH_SHORT).show()
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
         finish() // Close the current activity
+
     }
     override fun onStart() {
         super.onStart()

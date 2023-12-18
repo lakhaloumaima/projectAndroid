@@ -21,15 +21,15 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        mAuth=FirebaseAuth.getInstance();
-        email=findViewById(R.id.email);
+        mAuth=FirebaseAuth.getInstance()
+        email=findViewById(R.id.email)
         password=findViewById(R.id.password)
         signupRedirectText = findViewById(R.id.signupRedirectText)
         btn=findViewById(R.id.login)
         val maps: TextView = findViewById(R.id.maps)
 
         signupRedirectText.setOnClickListener {
-            intent = Intent(this,MainActivity::class.java)
+            intent = Intent(this,RegisterActivity::class.java)
             startActivity(intent)
         }
 
@@ -65,6 +65,7 @@ class LoginActivity : AppCompatActivity() {
 
             //  finish()
         }
+
     }
     fun login () {
         mAuth.signInWithEmailAndPassword(email.text.toString(),password.text.toString())

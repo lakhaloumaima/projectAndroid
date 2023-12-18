@@ -45,7 +45,7 @@ tools:context=".RegisterActivity">
             android:hint="Email"
             android:drawableLeft="@drawable/baseline_email_24"
             android:drawablePadding="8dp"
-            android:textColor="@color/white"  />
+            android:textColor="@color/black"  />
 
 
         <EditText
@@ -58,7 +58,7 @@ tools:context=".RegisterActivity">
             android:inputType="textPassword"
             android:drawableLeft="@drawable/baseline_lock_24"
             android:drawablePadding="8dp"
-            android:textColor="@color/white"  />
+            android:textColor="@color/black"  />
 
         <Button
             android:id="@+id/btnRegister"
